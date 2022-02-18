@@ -1,9 +1,9 @@
 ﻿using AghaShad_Shop.DataContext;
 using Microsoft.EntityFrameworkCore;
 
-namespace AghaShad_Shop.Reopository
+namespace AghaShad_Shop.Reopository.Implementation
 {
-    public class BaseRepository<TEntity,TKey> where TEntity : class
+    public class BaseRepository<TEntity, TKey> where TEntity : class
     {
         private readonly ShoppingContext _context;
         private readonly DbSet<TEntity> _dbset;
@@ -29,7 +29,7 @@ namespace AghaShad_Shop.Reopository
         {
             TEntity? entity = await FindAsync(id);
 
-            if(entity == null) throw new Exception("Entity not Found");
+            if (entity == null) throw new Exception("Entity not Found");
 
             _dbset.Remove(entity);
             await CommitAllChangesAsync();
