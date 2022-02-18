@@ -2,6 +2,7 @@
 using AghaShad_Shop.DTOs;
 using AghaShad_Shop.Models;
 using AghaShad_Shop.Reopository.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace AghaShad_Shop.Reopository.Implementation
 {
@@ -14,34 +15,49 @@ namespace AghaShad_Shop.Reopository.Implementation
             _context = context;
         }
 
-        public Task DeleteProduct(int id)
+        public Task DeleteProduct(int id) => DeleteAndSaveAsync(id);
+
+        public async Task<List<Product>> GetAllProducts() => await _context.Products.ToListAsync();
+
+        public async Task<Product> GetProductById(int id)
         {
-            throw new NotImplementedException();
+            Product? product = await _context.Products.FirstOrDefaultAsync(product => product.Id == id);
+
+            if (product == null) throw new Exception("Product not found");
+            return product;
         }
 
-        public Task<List<Product>> GetAllProducts()
+        public async Task<Product> GetProductByName(string name)
         {
-            throw new NotImplementedException();
+            Product? product = await _context.Products.FirstOrDefaultAsync(product => product.Name == name);
+
+            if (product == null) throw new Exception("Product not found");
+            return product;
         }
 
-        public Task<Product> GetProductById(int id)
+        public async Task InsertProduct(RegisterProductForm form)
         {
-            throw new NotImplementedException();
+            Product product = new()
+            {
+                Name = form.Name,
+                Color = form.Color,
+                Size = form.Size
+            };
+
+            await AddAndSaveAsync(product);
         }
 
-        public Task<Product> GetProductByName(string name)
+        public async Task UpdateProduct(int id, RegisterProductForm form)
         {
-            throw new NotImplementedException();
-        }
+            Product? product = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
 
-        public Task InsertProduct(RegisterProductForm form)
-        {
-            throw new NotImplementedException();
-        }
+            if (product == null) throw new Exception("Product not found");
 
-        public Task UpdateProduct(int id, RegisterProductForm form)
-        {
-            throw new NotImplementedException();
+            product.Name = form.Name;
+            product.Color = form.Color;
+            product.Size = form.Size;
+
+            await UpdateAndSaveAsync(product);
         }
     }
 }
