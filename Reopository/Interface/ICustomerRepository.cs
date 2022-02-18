@@ -5,8 +5,8 @@ namespace AghaShad_Shop.Reopository.Interface
 {
     public interface ICustomerRepository
     {
-        Task InsertCustomer(RegisterCustomerForm form);
-        Task UpdateCustomer(int id, RegisterCustomerForm form);
+        Task<int> InsertCustomer(RegisterCustomerDto form);
+        Task UpdateCustomer(int id, RegisterCustomerDto form);
         Task DeleteCustomer(int id);
         Task<Customer> GetCustomerById(int id);
         Task<Customer> GetCustomerByFullName(string name);

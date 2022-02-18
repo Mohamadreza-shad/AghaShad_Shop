@@ -5,8 +5,8 @@ namespace AghaShad_Shop.Reopository.Interface
 {
     public interface IProductRepository
     {
-        Task InsertProduct(RegisterProductForm form);
-        Task UpdateProduct(int id, RegisterProductForm form);
+        Task InsertProduct(RegisterProductDto form);
+        Task UpdateProduct(int id, RegisterProductDto form);
         Task DeleteProduct(int id);
         Task<Product> GetProductById(int id);
         Task<Product> GetProductByName(string name);

@@ -37,7 +37,7 @@ namespace AghaShad_Shop.Reopository.Implementation
             return shipping;
         }
 
-        public async Task InsertShipping(RegisterShippingForm form)
+        public async Task InsertShipping(RegisterShippingDto form)
         {
             Shipping shipping = new()
             {
@@ -47,7 +47,7 @@ namespace AghaShad_Shop.Reopository.Implementation
             await AddAndSaveAsync(shipping);  
         }
 
-        public async Task UpdateShipping(int id, RegisterShippingForm form)
+        public async Task UpdateShipping(int id, RegisterShippingDto form)
         {
             Shipping? shipping = await _context.Shippings.FirstOrDefaultAsync(shipp => shipp.Id == id);
             if (shipping == null) throw new Exception("Shipping not found");

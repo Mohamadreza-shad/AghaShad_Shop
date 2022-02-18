@@ -1,6 +1,6 @@
 ﻿namespace AghaShad_Shop.DTOs
 {
-    public class RegisterShippingForm
+    public class RegisterShippingDto
     {
         public string Name { get; set; }
     }

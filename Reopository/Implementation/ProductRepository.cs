@@ -35,7 +35,7 @@ namespace AghaShad_Shop.Reopository.Implementation
             return product;
         }
 
-        public async Task InsertProduct(RegisterProductForm form)
+        public async Task InsertProduct(RegisterProductDto form)
         {
             Product product = new()
             {
@@ -47,7 +47,7 @@ namespace AghaShad_Shop.Reopository.Implementation
             await AddAndSaveAsync(product);
         }
 
-        public async Task UpdateProduct(int id, RegisterProductForm form)
+        public async Task UpdateProduct(int id, RegisterProductDto form)
         {
             Product? product = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
 

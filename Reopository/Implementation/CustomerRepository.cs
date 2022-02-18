@@ -35,7 +35,7 @@ namespace AghaShad_Shop.Reopository.Implementation
             return customer;
         }
 
-        public async Task InsertCustomer(RegisterCustomerForm form)
+        public async Task<int> InsertCustomer(RegisterCustomerDto form)
         {
             Customer customer = new()
             {
@@ -44,9 +44,10 @@ namespace AghaShad_Shop.Reopository.Implementation
             };
 
             await AddAndSaveAsync(customer); 
+            return customer.Id;
         }
 
-        public async Task UpdateCustomer(int id, RegisterCustomerForm form)
+        public async Task UpdateCustomer(int id, RegisterCustomerDto form)
         {
             Customer? customer = await FindAsync(id);
             if (customer == null) throw new Exception("Customer not Found");

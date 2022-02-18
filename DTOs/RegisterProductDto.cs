@@ -1,14 +1,12 @@
 ﻿using AghaShad_Shop.Enums;
 
-namespace AghaShad_Shop.Models
+namespace AghaShad_Shop.DTOs
 {
-    public class Product
+    public class RegisterProductDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public ProductSize Size { get; set; }
         public string Color { get; set; }
 
-        public ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

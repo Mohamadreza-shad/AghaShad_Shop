@@ -27,7 +27,7 @@ namespace AghaShad_Shop.Reopository.Implementation
 
         public async Task<List<Address>> GetAllAddresses() => await _context.Address.ToListAsync();
 
-        public async Task InsertAddress(RegisterAddressForm form)
+        public async Task InsertAddress(RegisterAddressDto form)
         {
             Address address = new()
             {
@@ -40,7 +40,7 @@ namespace AghaShad_Shop.Reopository.Implementation
             await AddAndSaveAsync(address);
         }
 
-        public async Task UpdateAddress(int id, RegisterAddressForm form)
+        public async Task UpdateAddress(int id, RegisterAddressDto form)
         {
             Address? address = await _context.Address.FirstOrDefaultAsync(add => add.Id == id);
             if (address == null) throw new Exception("Address not Found");
