@@ -40,13 +40,12 @@ namespace AghaShad_Shop.Reopository.Implementation
             await AddAndSaveAsync(address);
         }
 
-        public async Task UpdateAddress(int id, RegisterAddressDto form)
+        public async Task UpdateAddress(int Customerid, RegisterAddressDto form)
         {
-            Address? address = await _context.Address.FirstOrDefaultAsync(add => add.Id == id);
+            Address? address = await _context.Address.FirstOrDefaultAsync(add => add.CustomerId == Customerid);
             if (address == null) throw new Exception("Address not Found");
 
             address.City = form.City;   
-            address.CustomerId = form.CustomerId;
             address.Description = form.Description; 
             address.Province = form.Province;
             await UpdateAndSaveAsync(address);

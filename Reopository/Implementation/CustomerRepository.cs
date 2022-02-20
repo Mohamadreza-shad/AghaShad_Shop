@@ -55,7 +55,10 @@ namespace AghaShad_Shop.Reopository.Implementation
             customer.Phone = form.Phone;
             customer.FullName = form.FullName;
 
+
             await UpdateAndSaveAsync(customer);
+
+
         }
     }
 }

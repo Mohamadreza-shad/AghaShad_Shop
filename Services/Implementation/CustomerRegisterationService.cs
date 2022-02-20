@@ -38,5 +38,24 @@ namespace AghaShad_Shop.Services.Implementation
 
             await _addressRepository.InsertAddress(addressDto);
         }
+
+        public async Task UpdateCustomer(int customerId, CustomerRegisterationForm form)
+        {
+            RegisterCustomerDto customerDto = new()
+            {
+                FullName = form.FullName, 
+                Phone = form.Phone,
+            };
+            await _customerRepository.UpdateCustomer(customerId, customerDto);
+
+            RegisterAddressDto addressDto = new()
+            {
+                City = form.City,
+                Description = form.Description,
+                Province = form.Province
+            };
+
+            await _addressRepository.UpdateAddress(customerId, addressDto);
+        }
     }
 }

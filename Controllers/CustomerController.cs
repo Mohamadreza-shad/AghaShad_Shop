@@ -19,6 +19,11 @@ namespace AghaShad_Shop.Controllers
             await _customerRegisteration.RegiterCustomer(form);
         }
 
+        [HttpPut("UpdateCustomer")]
+        public async Task UpdateCustomerAsync(int customerId, CustomerRegisterationForm form)
+        {
+            await _customerRegisteration.UpdateCustomer(customerId,form);
+        }
 
     }
 }
