@@ -24,8 +24,12 @@ namespace AghaShad_Shop.Extensions
 
             builder.Entity<Product>().Property(pr => pr.Size)
                                      .HasColumnName("Size")
-                                     .HasColumnType("int")
                                      .IsRequired();
+
+            builder.Entity<Product>().Property(pr => pr.UnitPrice)
+                                         .HasColumnName("UnitPrice")
+                                         .IsRequired();
+
 
             builder.Entity<Product>().HasMany(orderDetail => orderDetail.OrderDetails)
                                      .WithOne(p => p.Product)

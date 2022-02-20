@@ -17,12 +17,10 @@ namespace AghaShad_Shop.Extensions
 
             builder.Entity<OrderDetail>().Property(pr => pr.UnitPrice)
                                          .HasColumnName("UnitPrice")
-                                         .HasPrecision(2)
                                          .IsRequired();
 
             builder.Entity<OrderDetail>().Property(pr => pr.TotalPrice)
                                          .HasColumnName("TotalPrice")
-                                         .HasPrecision(2)
                                          .IsRequired();
 
             builder.Entity<OrderDetail>().HasOne(ordHeader => ordHeader.OrderHeader)

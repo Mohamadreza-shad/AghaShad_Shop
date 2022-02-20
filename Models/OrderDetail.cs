@@ -5,12 +5,7 @@
         public int Id { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
-
-        private decimal _total;
-        public decimal TotalPrice 
-        { get{   return _total = Quantity * UnitPrice;} 
-          set{   _total = value;} 
-        }
+        public decimal TotalPrice { get; set; }
 
         public int OrderHeaderId { get; set; }
         public OrderHeader OrderHeader { get; set; }

@@ -2,7 +2,7 @@
 
 namespace AghaShad_Shop.Services.Interface
 {
-    public interface ICustomerRegisteration
+    public interface ICustomerRegisterationService
     {
         Task RegiterCustomer(CustomerRegisterationForm form);
     }

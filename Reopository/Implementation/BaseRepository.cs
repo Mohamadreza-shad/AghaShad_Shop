@@ -35,7 +35,10 @@ namespace AghaShad_Shop.Reopository.Implementation
             await CommitAllChangesAsync();
         }
 
-        public async Task<TEntity?> FindAsync(TKey id) => await _dbset.FindAsync(id);
+        public async Task<TEntity?> FindAsync(TKey id)
+        {
+            return await _dbset.FindAsync(id);
+        } 
 
         public async Task CommitAllChangesAsync() => await _context.SaveChangesAsync();
     }

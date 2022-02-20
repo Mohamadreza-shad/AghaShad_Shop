@@ -8,6 +8,7 @@ namespace AghaShad_Shop.Models
         public string Name { get; set; }
         public ProductSize Size { get; set; }
         public string Color { get; set; }
+        public decimal UnitPrice { get; set; }
 
         public ICollection<OrderDetail> OrderDetails { get; set; }
     }

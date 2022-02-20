@@ -6,9 +6,9 @@ namespace AghaShad_Shop.Controllers
 {
     public class CustomerController : BaseApiController
     {
-        private readonly ICustomerRegisteration _customerRegisteration;
+        private readonly ICustomerRegisterationService _customerRegisteration;
 
-        public CustomerController(ICustomerRegisteration customerRegisteration)
+        public CustomerController(ICustomerRegisterationService customerRegisteration)
         {
             _customerRegisteration = customerRegisteration;
         }

@@ -6,12 +6,12 @@ using AghaShad_Shop.Services.Interface;
 
 namespace AghaShad_Shop.Services.Implementation
 {
-    public class CustomerRegisteration : ICustomerRegisteration
+    public class CustomerRegisterationService : ICustomerRegisterationService
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IAddressRepository _addressRepository;
 
-        public CustomerRegisteration(ICustomerRepository customerRepository,
+        public CustomerRegisterationService(ICustomerRepository customerRepository,
                                      IAddressRepository addressRepository)
         {
             _customerRepository = customerRepository;

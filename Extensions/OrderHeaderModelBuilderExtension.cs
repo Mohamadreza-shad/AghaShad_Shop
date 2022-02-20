@@ -15,7 +15,7 @@ namespace AghaShad_Shop.Extensions
                                          .HasColumnType("int");
 
             builder.Entity<OrderHeader>().Property(pr => pr.OrderDate)
-                                         .HasColumnName("OrderHeader")
+                                         .HasColumnName("OrderDate")
                                          .IsRequired();
 
             builder.Entity<OrderHeader>().HasOne(ship => ship.Shipping)

@@ -1,13 +1,13 @@
 ﻿using AghaShad_Shop.Enums;
 
-namespace AghaShad_Shop.Forms
+namespace AghaShad_Shop.DTOs
 {
-    public class RegisterOrderForm
+    public class RegisterOrderDetailDto
     {
-        public int CustomerId { get; set; }
         public int ProductId { get; set; }
         public int Quantity { get; set; }
         public ProductSize Size { get; set; }
-        public int ShipperId { get; set; }
+        public int OrderId { get; set; }
+        public decimal UnitPrice { get; set; }
     }
 }

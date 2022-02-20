@@ -2,7 +2,7 @@
 
 namespace AghaShad_Shop.Services.Interface
 {
-    public interface IOrderHeaderRegistration
+    public interface IOrderHeaderRegistrationService
     {
         Task RegisterOrderHeader(RegisterOrderForm form);
     }

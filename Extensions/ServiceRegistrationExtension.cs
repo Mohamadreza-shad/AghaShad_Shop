@@ -13,7 +13,10 @@ namespace AghaShad_Shop.Extensions
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IShippingRepository, ShippingRepository>();
-            services.AddScoped<ICustomerRegisteration, CustomerRegisteration>();
+            services.AddScoped<IOrderHeaderRepository, OrderHeaderRepository>();
+            services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+            services.AddScoped<ICustomerRegisterationService, CustomerRegisterationService>();
+            services.AddScoped<IOrderHeaderRegistrationService, OrderHeaderRegistrationService>();
         }
     }
 }
