@@ -1,4 +1,5 @@
 ﻿using AghaShad_Shop.Forms;
+using AghaShad_Shop.OutPut;
 using AghaShad_Shop.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +25,13 @@ namespace AghaShad_Shop.Controllers
         {
             await _customerRegisteration.UpdateCustomer(customerId,form);
         }
+
+        [HttpGet("GetCustomerById")]
+        public async Task<CustomerOutPut> GetCustomerByIdAsync(int customerId)
+        {
+            return await _customerRegisteration.GetCustomerByIdAsync(customerId);
+        }
+
 
     }
 }
