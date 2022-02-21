@@ -20,6 +20,7 @@ namespace AghaShad_Shop.Extensions
             services.AddScoped<ICustomerRegisterationService, CustomerRegisterationService>();
             services.AddScoped<IOrderHeaderRegistrationService, OrderHeaderRegistrationService>();
             services.AddScoped<ICustomerQueryService, CustomerQueryService>();
+            services.AddScoped<IShippersService, ShippersService>();
         }
     }
 }

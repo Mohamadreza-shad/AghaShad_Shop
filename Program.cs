@@ -15,7 +15,6 @@ builder.Services.RegisterApplicationServices();
 builder.Services.AddDbContext<ShoppingContext>(opt => 
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
