@@ -1,4 +1,6 @@
-﻿using AghaShad_Shop.Reopository.Implementation;
+﻿using AghaShad_Shop.QueryService;
+using AghaShad_Shop.QueryService.Interface;
+using AghaShad_Shop.Reopository.Implementation;
 using AghaShad_Shop.Reopository.Interface;
 using AghaShad_Shop.Services.Implementation;
 using AghaShad_Shop.Services.Interface;
@@ -17,6 +19,7 @@ namespace AghaShad_Shop.Extensions
             services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
             services.AddScoped<ICustomerRegisterationService, CustomerRegisterationService>();
             services.AddScoped<IOrderHeaderRegistrationService, OrderHeaderRegistrationService>();
+            services.AddScoped<ICustomerQueryService, CustomerQueryService>();
         }
     }
 }

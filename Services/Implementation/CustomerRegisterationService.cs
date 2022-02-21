@@ -2,8 +2,10 @@
 using AghaShad_Shop.Forms;
 using AghaShad_Shop.Models;
 using AghaShad_Shop.OutPut;
+using AghaShad_Shop.QueryService.Interface;
 using AghaShad_Shop.Reopository.Interface;
 using AghaShad_Shop.Services.Interface;
+using AghaShad_Shop.Views;
 
 namespace AghaShad_Shop.Services.Implementation
 {
@@ -11,30 +13,29 @@ namespace AghaShad_Shop.Services.Implementation
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IAddressRepository _addressRepository;
+        private readonly ICustomerQueryService _customerQueryService;
 
         public CustomerRegisterationService(ICustomerRepository customerRepository,
-                                     IAddressRepository addressRepository)
+                                            IAddressRepository addressRepository,
+                                            ICustomerQueryService customerQueryService)
         {
             _customerRepository = customerRepository;
             _addressRepository = addressRepository;
+            _customerQueryService = customerQueryService;
         }
 
         public async Task<CustomerOutPut> GetCustomerByIdAsync(int customerId)
         {
-
-            // Create a view and read instead of this shit.
-            Customer customer = await _customerRepository.GetCustomerById(customerId);
-
-            Address address = await _addressRepository.GetAddressById(customerId);
+            CustomerAddressView result = await _customerQueryService.GetCustomerAddress(customerId);
 
             return new CustomerOutPut
             {
-                CustomerId = customer.Id,
-                Phone = customer.Phone,
-                FullName = customer.FullName,
-                City = address.City,
-                Description = address.Description,
-                Province = address.Province,
+                CustomerId = result.Id,
+                Phone = result.Phone,
+                FullName = result.FullName,
+                City = result.City,
+                Description = result.Description,
+                Province = result.Province,
             };
         }
 

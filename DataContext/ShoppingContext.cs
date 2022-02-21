@@ -1,5 +1,7 @@
 ﻿using AghaShad_Shop.Extensions;
+using AghaShad_Shop.Extensions.ViewsConfiguration;
 using AghaShad_Shop.Models;
+using AghaShad_Shop.Views;
 using Microsoft.EntityFrameworkCore;
 
 namespace AghaShad_Shop.DataContext
@@ -14,14 +16,20 @@ namespace AghaShad_Shop.DataContext
         public DbSet<Shipping> Shippings { get; set; }
         public DbSet<Address> Address { get; set; }
 
+        public DbSet<CustomerAddressView> CustomerAddressView { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Entities
             modelBuilder.ShippingOnModelBuilderExtension();
             modelBuilder.OrderDetailOnModelBuilderExtension();
             modelBuilder.OrderHeaderOnModelBuilderExtension();
             modelBuilder.CustomerOnModelBuilderExtension();
             modelBuilder.AddressOnModelBuilderExtension();
             modelBuilder.ProductOnModelBuilderExtension();
+
+            //Views
+            modelBuilder.CustomerAddressViewRegistration();
         }
     }   
 }
