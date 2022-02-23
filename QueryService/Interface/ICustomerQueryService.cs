@@ -4,6 +4,6 @@ namespace AghaShad_Shop.QueryService.Interface
 {
     public interface ICustomerQueryService
     {
-        Task<CustomerAddressView> GetCustomerAddress(int customerId);
+        Task<CustomerAddressView?> GetCustomerAddress(int customerId);
     }
 }

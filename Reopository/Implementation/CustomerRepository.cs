@@ -17,24 +17,15 @@ namespace AghaShad_Shop.Reopository.Implementation
 
         public async Task DeleteCustomer(int id) => await DeleteAndSaveAsync(id);
 
-        public async Task<List<Customer>> GetAllCustomers() => await _context.Customers.ToListAsync();
+        public async Task<List<Customer?>> GetAllCustomers() => await _context.Customers.ToListAsync();
         
-        public async Task<Customer> GetCustomerByFullName(string name)
+        public async Task<Customer?> GetCustomerByFullName(string name)
         {
-            Customer? customer = await _context.Customers
-                                 .FirstOrDefaultAsync(customer => customer.FullName == name);
-
-            if (customer == null) throw new Exception("Customer not Found");
-            return customer;    
+            return await _context.Customers.FirstOrDefaultAsync(customer => customer.FullName == name);
         }
 
-        public async Task<Customer> GetCustomerById(int id)
-        {
-            Customer? customer = await FindAsync(id);
-            if (customer == null) throw new Exception("Customer not Found");
-            return customer;
-        }
-
+        public async Task<Customer?> GetCustomerById(int id) => await FindAsync(id);
+        
         public async Task<int> InsertCustomer(RegisterCustomerDto form)
         {
             Customer customer = new()
@@ -55,10 +46,7 @@ namespace AghaShad_Shop.Reopository.Implementation
             customer.Phone = form.Phone;
             customer.FullName = form.FullName;
 
-
             await UpdateAndSaveAsync(customer);
-
-
         }
     }
 }

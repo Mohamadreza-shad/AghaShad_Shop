@@ -8,9 +8,9 @@ namespace AghaShad_Shop.Reopository.Interface
         Task InsertProduct(RegisterProductDto form);
         Task UpdateProduct(int id, RegisterProductDto form);
         Task DeleteProduct(int id);
-        Task<Product> GetProductById(int id);
-        Task<Product> GetProductByName(string name);
-        Task<List<Product>> GetAllProducts();
+        Task<Product?> GetProductById(int id);
+        Task<Product?> GetProductByName(string name);
+        Task<List<Product?>> GetAllProducts();
 
     }
 }

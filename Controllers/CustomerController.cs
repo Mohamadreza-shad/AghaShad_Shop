@@ -1,7 +1,9 @@
-﻿using AghaShad_Shop.Forms;
+﻿using AghaShad_Shop.Errors;
+using AghaShad_Shop.Forms;
 using AghaShad_Shop.OutPut;
 using AghaShad_Shop.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace AghaShad_Shop.Controllers
 {
@@ -27,9 +29,13 @@ namespace AghaShad_Shop.Controllers
         }
 
         [HttpGet("GetCustomerById")]
-        public async Task<CustomerOutPut> GetCustomerByIdAsync(int customerId)
+        public async Task<IActionResult> GetCustomerByIdAsync(int customerId)
         {
-            return await _customerRegisteration.GetCustomerByIdAsync(customerId);
+            ApiResponseResult<CustomerOutPut> apiResponseResult = await _customerRegisteration.GetCustomerByIdAsync(customerId);
+
+            return (apiResponseResult == null) ?
+                NotFound(apiResponseResult) :
+                Ok(apiResponseResult);
         }
 
 

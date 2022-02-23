@@ -1,9 +1,11 @@
 ﻿using AghaShad_Shop.DTOs;
+using AghaShad_Shop.Errors;
 using AghaShad_Shop.Forms;
 using AghaShad_Shop.Models;
 using AghaShad_Shop.OutPut;
 using AghaShad_Shop.Reopository.Interface;
 using AghaShad_Shop.Services.Interface;
+using System.Net;
 
 namespace AghaShad_Shop.Services.Implementation
 {
@@ -21,23 +23,46 @@ namespace AghaShad_Shop.Services.Implementation
             await _shippingRepository.DeleteShipping(shipperId);
         }
 
-        public async Task<List<ShipperOutput>> GetAllShippers()
+        public async Task<ApiResponseResult<List<ShipperOutput>>> GetAllShippers()
         {
-            List<Shipping> shippersList =  await _shippingRepository.GetAllShippings();
+            ApiResponseResult<List<ShipperOutput>> apiResponseResult = new();
+            List<Shipping?> shippersList =  await _shippingRepository.GetAllShippings();
             List<ShipperOutput> shipperOutputs = new();
 
-            foreach (Shipping shipper in shippersList)
+            foreach (Shipping? shipper in shippersList)
             {
                 shipperOutputs.Add(new ShipperOutput { Name = shipper.Name });
             }
-            return shipperOutputs;
+            
+            if(!shipperOutputs.Any())
+            {
+                apiResponseResult.Error = Error.ShipperNotFound;
+                apiResponseResult.HttpStatusCode = HttpStatusCode.NotFound;
+                return apiResponseResult;
+            }
+
+            apiResponseResult.Result = shipperOutputs;
+            apiResponseResult.HttpStatusCode = HttpStatusCode.OK;
+            return apiResponseResult;
 
         }
 
-        public async Task<ShipperOutput> GetShipperById(int shipperId)
+        public async Task<ApiResponseResult<ShipperOutput>> GetShipperById(int shipperId)
         {
-            Shipping shipping = await _shippingRepository.GetShippingById(shipperId);
-            return new ShipperOutput { Name = shipping.Name };
+            Shipping? shipping = await _shippingRepository.GetShippingById(shipperId);
+
+            return (shipping == null) ?
+            new ApiResponseResult<ShipperOutput>
+            {
+                Error = Error.ShipperNotFound,
+                HttpStatusCode = HttpStatusCode.NotFound
+            }
+            :
+            new ApiResponseResult<ShipperOutput>
+            {
+                Result = new ShipperOutput { Name = shipping.Name },
+                HttpStatusCode = HttpStatusCode.OK
+            };
         }
 
         public async Task RegisterShipper(RegisterShipperForm form)

@@ -8,7 +8,7 @@ namespace AghaShad_Shop.Reopository.Interface
         Task<int> InsertOrderDetail(RegisterOrderDetailDto form);
         Task UpdateOrderDetail(int id, RegisterOrderDetailDto form);
         Task DeleteOrderDetail(int id);
-        Task<OrderDetail> GetOrderDetailById(int id);
-        Task<List<OrderDetail>> GetOrderHeaderAllOrderDetails(int Orderid);
+        Task<OrderDetail?> GetOrderDetailById(int id);
+        Task<List<OrderDetail?>> GetOrderHeaderAllOrderDetails(int Orderid);
     }
 }

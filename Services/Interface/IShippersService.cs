@@ -8,7 +8,7 @@ namespace AghaShad_Shop.Services.Interface
         Task RegisterShipper(RegisterShipperForm form);
         Task UpdateShipper(int shipperId, RegisterShipperForm form);
         Task DeleteShipper(int shipperId);
-        Task<ShipperOutput> GetShipperById(int shipperId);
-        Task<List<ShipperOutput>> GetAllShippers();
+        Task<ApiResponseResult<ShipperOutput>> GetShipperById(int shipperId);
+        Task<ApiResponseResult<List<ShipperOutput>>> GetAllShippers();
     }
 }

@@ -15,7 +15,7 @@ namespace AghaShad_Shop.QueryService
             _context = context;
         }
 
-        public async Task<CustomerAddressView> GetCustomerAddress(int customerId)
+        public async Task<CustomerAddressView?> GetCustomerAddress(int customerId)
         {
             CustomerAddressView? addressView = await _context.CustomerAddressView
                                                .FirstOrDefaultAsync(cus => cus.Id == customerId);

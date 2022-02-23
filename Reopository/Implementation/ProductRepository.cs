@@ -17,22 +17,16 @@ namespace AghaShad_Shop.Reopository.Implementation
 
         public Task DeleteProduct(int id) => DeleteAndSaveAsync(id);
 
-        public async Task<List<Product>> GetAllProducts() => await _context.Products.ToListAsync();
+        public async Task<List<Product?>> GetAllProducts() => await _context.Products.ToListAsync();
 
-        public async Task<Product> GetProductById(int id)
+        public async Task<Product?> GetProductById(int id)
         {
-            Product? product = await _context.Products.FirstOrDefaultAsync(product => product.Id == id);
-
-            if (product == null) throw new Exception("Product not found");
-            return product;
+            return await _context.Products.FirstOrDefaultAsync(product => product.Id == id);
         }
 
-        public async Task<Product> GetProductByName(string name)
+        public async Task<Product?> GetProductByName(string name)
         {
-            Product? product = await _context.Products.FirstOrDefaultAsync(product => product.Name == name);
-
-            if (product == null) throw new Exception("Product not found");
-            return product;
+            return await _context.Products.FirstOrDefaultAsync(product => product.Name == name);
         }
 
         public async Task InsertProduct(RegisterProductDto form)

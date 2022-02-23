@@ -17,15 +17,12 @@ namespace AghaShad_Shop.Reopository.Implementation
 
         public async Task DeleteAddress(int id) => await DeleteAndSaveAsync(id);    
         
-        public async Task<Address> GetAddressById(int id)
+        public async Task<Address?> GetAddressById(int id)
         {
-            Address? address = await _context.Address.FirstOrDefaultAsync(add => add.Id == id);
-            if (address == null) throw new Exception("Address not Found");
-            
-            return address;
+            return await _context.Address.FirstOrDefaultAsync(add => add.Id == id);
         }
 
-        public async Task<List<Address>> GetAllAddresses() => await _context.Address.ToListAsync();
+        public async Task<List<Address?>> GetAllAddresses() => await _context.Address.ToListAsync();
 
         public async Task InsertAddress(RegisterAddressDto form)
         {

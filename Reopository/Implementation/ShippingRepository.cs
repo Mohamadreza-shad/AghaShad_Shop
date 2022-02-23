@@ -18,23 +18,17 @@ namespace AghaShad_Shop.Reopository.Implementation
         public Task DeleteShipping(int id) => DeleteAndSaveAsync(id);
 
 
-        public async Task<List<Shipping>> GetAllShippings() => await _context.Shippings.ToListAsync();
+        public async Task<List<Shipping?>> GetAllShippings() => await _context.Shippings.ToListAsync();
         
 
-        public async Task<Shipping> GetShippingById(int id)
+        public async Task<Shipping?> GetShippingById(int id)
         {
-            Shipping? shipping = await _context.Shippings.FirstOrDefaultAsync(shipp => shipp.Id == id);
-            if (shipping == null) throw new Exception("Shipping not found");
-
-            return shipping;
+            return await _context.Shippings.FirstOrDefaultAsync(shipp => shipp.Id == id);
         }
 
-        public async Task<Shipping> GetShippingByName(string name)
+        public async Task<Shipping?> GetShippingByName(string name)
         {
-            Shipping? shipping = await _context.Shippings.FirstOrDefaultAsync(shipp => shipp.Name == name);
-            if (shipping == null) throw new Exception("Shipping not found");
-
-            return shipping;
+            return await _context.Shippings.FirstOrDefaultAsync(shipp => shipp.Name == name);
         }
 
         public async Task InsertShipping(RegisterShippingDto form)

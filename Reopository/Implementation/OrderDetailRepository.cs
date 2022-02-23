@@ -21,21 +21,17 @@ namespace AghaShad_Shop.Reopository.Implementation
         public async Task DeleteOrderDetail(int id) => await DeleteAndSaveAsync(id);
 
 
-        public async Task<OrderDetail> GetOrderDetailById(int id)
+        public async Task<OrderDetail?> GetOrderDetailById(int id)
         {
-            OrderDetail? orderDetail = await _context.OrderDetails.FirstOrDefaultAsync(x => x.Id == id);
-            if (orderDetail == null) throw new Exception("Order Detail not found");
-
-            return orderDetail;
+            return await _context.OrderDetails.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<List<OrderDetail>> GetOrderHeaderAllOrderDetails(int orderid)
+        public async Task<List<OrderDetail?>> GetOrderHeaderAllOrderDetails(int orderid)
         {
-            List<OrderDetail> orderDetails = await _context.OrderDetails
-                                                    .Include(order => order.OrderHeader)
-                                                    .Where(order => order.OrderHeaderId == orderid)
-                                                    .ToListAsync();
-            return orderDetails;
+            return await _context.OrderDetails
+                        .Include(order => order.OrderHeader)
+                        .Where(order => order.OrderHeaderId == orderid)
+                        .ToListAsync();
         }
 
         public async Task<int> InsertOrderDetail(RegisterOrderDetailDto form)

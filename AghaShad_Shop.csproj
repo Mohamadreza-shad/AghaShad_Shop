@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MyExceptions\" />
     <Folder Include="QueryService\Implementation\" />
   </ItemGroup>
 

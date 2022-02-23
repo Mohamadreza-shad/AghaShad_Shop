@@ -7,6 +7,6 @@ namespace AghaShad_Shop.Services.Interface
     {
         Task RegiterCustomer(CustomerRegisterationForm form);
         Task UpdateCustomer(int customerId, CustomerRegisterationForm form);
-        Task<CustomerOutPut> GetCustomerByIdAsync(int customerId);
+        Task<ApiResponseResult<CustomerOutPut>> GetCustomerByIdAsync(int customerId);
     }
 }

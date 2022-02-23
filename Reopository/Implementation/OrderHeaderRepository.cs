@@ -17,23 +17,17 @@ namespace AghaShad_Shop.Reopository.Implementation
 
         public async Task DeleteOrderHeader(int id) => await DeleteAndSaveAsync(id);
 
-        public async Task<List<OrderHeader>> GetCustomerAllOrderHeaders(int customerId)
+        public async Task<List<OrderHeader?>> GetCustomerAllOrderHeaders(int customerId)
         {
-            List<OrderHeader> orderHeaders = await _context.OrderHeaders
-                                                            .Include(cus => cus.Customer)
-                                                            .Where(order => order.CustomerId == customerId)
-                                                            .ToListAsync();
-
-            return orderHeaders;
+            return await _context.OrderHeaders
+                        .Include(cus => cus.Customer)
+                        .Where(order => order.CustomerId == customerId)
+                        .ToListAsync();
         }
         
-        public async Task<OrderHeader> GetOrderHeaderById(int id)
+        public async Task<OrderHeader?> GetOrderHeaderById(int id)
         {
-            OrderHeader? order = await _context.OrderHeaders.FirstOrDefaultAsync(order => order.Id == id);
-
-            if (order == null) throw new Exception("Order not found");
-
-            return order;
+            return await _context.OrderHeaders.FirstOrDefaultAsync(order => order.Id == id);
         }
 
         public async Task<int> InsertOrderHeader(RegisterOrderHeaderDto form)

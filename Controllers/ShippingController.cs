@@ -1,7 +1,9 @@
-﻿using AghaShad_Shop.Forms;
+﻿using AghaShad_Shop.Errors;
+using AghaShad_Shop.Forms;
 using AghaShad_Shop.OutPut;
 using AghaShad_Shop.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace AghaShad_Shop.Controllers
 {
@@ -33,15 +35,24 @@ namespace AghaShad_Shop.Controllers
         }
 
         [HttpGet("GetShipperById")]
-        public async Task<ShipperOutput> GetShipperById(int shipperId)
+        public async Task<IActionResult> GetShipperById(int shipperId)
         {
-            return await _shippersService.GetShipperById(shipperId);    
+            ApiResponseResult<ShipperOutput> apiResponseResult =
+                                                    await _shippersService.GetShipperById(shipperId);
+
+            return (apiResponseResult.HttpStatusCode == HttpStatusCode.OK) ?
+                    Ok(apiResponseResult) :
+                    NotFound(apiResponseResult);
         }
 
         [HttpGet("GetShippers")]
-        public async Task<List<ShipperOutput>> GetShippers()
+        public async Task<IActionResult> GetShippers()
         {
-            return await _shippersService.GetAllShippers();
+            ApiResponseResult<List<ShipperOutput>> apiResponseResult = await _shippersService.GetAllShippers();
+
+            return (apiResponseResult.HttpStatusCode == HttpStatusCode.OK) ?
+                    Ok(apiResponseResult) :
+                    NotFound(apiResponseResult);
         }
 
 

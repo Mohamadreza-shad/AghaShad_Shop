@@ -8,9 +8,9 @@ namespace AghaShad_Shop.Reopository.Interface
         Task InsertShipping(RegisterShippingDto form);
         Task UpdateShipping(int id, RegisterShippingDto form);
         Task DeleteShipping(int id);
-        Task<Shipping> GetShippingById(int id);
-        Task<Shipping> GetShippingByName(string name);
-        Task<List<Shipping>> GetAllShippings();
+        Task<Shipping?> GetShippingById(int id);
+        Task<Shipping?> GetShippingByName(string name);
+        Task<List<Shipping?>> GetAllShippings();
 
     }
 }
