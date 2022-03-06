@@ -11,6 +11,5 @@ namespace AghaShad_Shop.Reopository.Interface
         Task<Product?> GetProductById(int id);
         Task<Product?> GetProductByName(string name);
         Task<List<Product?>> GetAllProducts();
-
     }
 }

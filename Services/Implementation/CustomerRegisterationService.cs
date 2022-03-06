@@ -7,6 +7,7 @@ using AghaShad_Shop.QueryService.Interface;
 using AghaShad_Shop.Reopository.Interface;
 using AghaShad_Shop.Services.Interface;
 using AghaShad_Shop.Views;
+using AutoMapper;
 using System.Net;
 
 namespace AghaShad_Shop.Services.Implementation
@@ -16,14 +17,17 @@ namespace AghaShad_Shop.Services.Implementation
         private readonly ICustomerRepository _customerRepository;
         private readonly IAddressRepository _addressRepository;
         private readonly ICustomerQueryService _customerQueryService;
+        private readonly IMapper _mapper;
 
         public CustomerRegisterationService(ICustomerRepository customerRepository,
                                             IAddressRepository addressRepository,
-                                            ICustomerQueryService customerQueryService)
+                                            ICustomerQueryService customerQueryService,
+                                            IMapper mapper)
         {
             _customerRepository = customerRepository;
             _addressRepository = addressRepository;
             _customerQueryService = customerQueryService;
+            _mapper = mapper;
         }
 
         public async Task<ApiResponseResult<CustomerOutPut?>> GetCustomerByIdAsync(int customerId)
@@ -53,42 +57,25 @@ namespace AghaShad_Shop.Services.Implementation
             };
         }
 
-        public async Task RegiterCustomer(CustomerRegisterationForm form)
+        public async Task<int> RegiterCustomer(CustomerRegisterationForm form)
         {
-            RegisterCustomerDto registerCustomerDto = new()
-            {
-                FullName = form.FullName,
-                Phone = form.Phone,
-            };
+            RegisterCustomerDto registerCustomerDto = _mapper.Map<RegisterCustomerDto>(form);
 
             int customerId = await _customerRepository.InsertCustomer(registerCustomerDto);
 
-            RegisterAddressDto addressDto = new()
-            {
-                City = form.City,
-                CustomerId = customerId,
-                Description = form.Description,
-                Province = form.Province
-            };
-
+            RegisterAddressDto addressDto = _mapper.Map<RegisterAddressDto>(form);
+            addressDto.CustomerId = customerId;
             await _addressRepository.InsertAddress(addressDto);
+            return customerId;
         }
 
         public async Task UpdateCustomer(int customerId, CustomerRegisterationForm form)
         {
-            RegisterCustomerDto customerDto = new()
-            {
-                FullName = form.FullName, 
-                Phone = form.Phone,
-            };
+            RegisterCustomerDto customerDto = _mapper.Map<RegisterCustomerDto>(form);
+            
             await _customerRepository.UpdateCustomer(customerId, customerDto);
 
-            RegisterAddressDto addressDto = new()
-            {
-                City = form.City,
-                Description = form.Description,
-                Province = form.Province
-            };
+            RegisterAddressDto addressDto = _mapper.Map<RegisterAddressDto>(form);
 
             await _addressRepository.UpdateAddress(customerId, addressDto);
         }

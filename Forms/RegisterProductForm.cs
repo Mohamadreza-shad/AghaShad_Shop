@@ -1,8 +1,8 @@
 ﻿using AghaShad_Shop.Enums;
 
-namespace AghaShad_Shop.DTOs
+namespace AghaShad_Shop.Forms
 {
-    public class RegisterProductDto
+    public class RegisterProductForm
     {
         public string Name { get; set; }
         public ProductSize Size { get; set; }
